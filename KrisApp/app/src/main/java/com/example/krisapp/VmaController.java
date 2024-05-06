@@ -3,6 +3,7 @@ package com.example.krisapp;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,7 +21,7 @@ import okhttp3.Response;
 
 public class VmaController {
     private final OkHttpClient client = new OkHttpClient();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -41,8 +42,8 @@ public class VmaController {
         public String description;
         @JsonProperty("CoordinateObject")
         public CoordinateObject coordinateObject;
-        @JsonProperty("GeometryInformation")
-        public GeometryInformation geometryInformation;
+        //@JsonProperty("GeometryInformation")
+        //public GeometryInformation geometryInformation;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -55,13 +56,13 @@ public class VmaController {
         public String altitude;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
+    /*@JsonIgnoreProperties(ignoreUnknown = true)
     public static class GeometryInformation {
         @JsonProperty("PoleOfInInaccessibility")
         public PoleOfInaccessibility poleOfInaccessibility;
         @JsonProperty("Geometry")
         public Geometry geometry;
-    }
+    }*/
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class PoleOfInaccessibility {
@@ -71,13 +72,13 @@ public class VmaController {
         public List<Double> coordinates;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
+    /*@JsonIgnoreProperties(ignoreUnknown = true)
     public static class Geometry {
         @JsonProperty("type")
         public String type;
         @JsonProperty("coordinates")
         public List<List<List<Double>>> coordinates;
-    }
+    }*/
 
     public interface MessageDisplayer {
         void displayMessage(String message);
@@ -87,6 +88,8 @@ public class VmaController {
 
     public VmaController(MessageDisplayer displayer) {
         this.displayer = displayer;
+        this.objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     }
 
     public void fetchAndDisplayMessage() {
@@ -110,18 +113,7 @@ public class VmaController {
                     try {
                         VmaMessage[] vmaMessages = objectMapper.readValue(responseData, VmaMessage[].class);
                         if (vmaMessages.length > 0) {
-                            VmaMessage vmaMessage = vmaMessages[0];
-                            StringBuilder messageBuilder = new StringBuilder();
-                            messageBuilder.append("Headline: ").append(vmaMessage.headline).append("\n")
-                                    .append("Published: ").append(vmaMessage.published).append("\n")
-                                    .append("BodyText: ").append(vmaMessage.bodyText).append("\n");
-
-                            for (Area area : vmaMessage.areas) {
-                                messageBuilder.append("Area Description: ").append(area.description).append("\n")
-                                        .append("Latitude: ").append(area.coordinateObject.latitude).append("\n")
-                                        .append("Longitude: ").append(area.coordinateObject.longitude).append("\n");
-                            }
-                            mainHandler.post(() -> displayer.displayMessage(messageBuilder.toString()));
+                            processMessages(vmaMessages);
                         } else {
                             mainHandler.post(() -> displayer.displayMessage("No VMA messages found."));
                         }
@@ -134,5 +126,15 @@ public class VmaController {
                 }
             }
         });
+    }
+
+    private void processMessages(VmaMessage[] messages) {
+        StringBuilder messageBuilder = new StringBuilder();
+        for (VmaMessage message : messages) {
+            messageBuilder.append("Headline: ").append(message.headline).append("\n")
+                    .append("Published: ").append(message.published).append("\n")
+                    .append("BodyText: ").append(message.bodyText).append("\n");
+        }
+        mainHandler.post(() -> displayer.displayMessage(messageBuilder.toString()));
     }
 }
