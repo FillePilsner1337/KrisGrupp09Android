@@ -8,6 +8,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.List;
+
 public class VMAACTIVITY extends AppCompatActivity implements VmaController.MessageDisplayer{
     private VmaController vmaController;
     private TextView messageTextView;
@@ -27,9 +29,14 @@ public class VMAACTIVITY extends AppCompatActivity implements VmaController.Mess
         vmaController = new VmaController(this);
         vmaController.fetchAndDisplayMessage();
     }
-    public void displayMessage(String message) {
-        if (messageTextView != null) {
-            messageTextView.setText(message);
+
+
+    @Override
+    public void displayMessages(List<VMAMessageObject> messages) {
+        StringBuilder builder = new StringBuilder();
+        for (VMAMessageObject message : messages) {
+            builder.append(message.toString()).append("\n\n");
         }
+        messageTextView.setText(builder.toString());
     }
 }
