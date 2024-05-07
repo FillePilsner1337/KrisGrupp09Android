@@ -87,10 +87,6 @@ public class VmaController {
         public String altitude;
     }
 
-    public interface MessageDisplayer {
-        void displayMessages(List<VMAMessageObject> messages);
-    }
-
     private MessageDisplayer displayer;
 
     public void fetchAndDisplayMessage() {

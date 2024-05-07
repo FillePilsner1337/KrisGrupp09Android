@@ -7,11 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class VMAACTIVITY extends AppCompatActivity implements VmaController.MessageDisplayer{
+public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
     private VmaController vmaController;
+    private RecyclerView messagesRecyclerView;
+    private VmaMessageAdapter adapter;
     private TextView messageTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +24,8 @@ public class VMAACTIVITY extends AppCompatActivity implements VmaController.Mess
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_vmaactivity);
 
-        messageTextView = findViewById(R.id.messageTextView);
+        messagesRecyclerView = findViewById(R.id.messagesRecyclerView);
+        messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -28,15 +34,15 @@ public class VMAACTIVITY extends AppCompatActivity implements VmaController.Mess
         });
         vmaController = new VmaController(this);
         vmaController.fetchAndDisplayMessage();
+
+        adapter = new VmaMessageAdapter(new ArrayList<>());
+        messagesRecyclerView.setAdapter(adapter);
     }
 
 
     @Override
     public void displayMessages(List<VMAMessageObject> messages) {
-        StringBuilder builder = new StringBuilder();
-        for (VMAMessageObject message : messages) {
-            builder.append(message.toString()).append("\n\n");
-        }
-        messageTextView.setText(builder.toString());
+        adapter = new VmaMessageAdapter(messages);
+        messagesRecyclerView.setAdapter(adapter);
     }
 }

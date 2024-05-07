@@ -25,6 +25,6 @@ public class VMAMessageObject {
 
     @Override
     public String toString() {
-        return "Headline: " + headline + "\nPublished: " + published + "\nBodyText: " + bodyText;
+        return  headline + "\nTid: " + published + "\nBodyText: " + bodyText + "De här är fake bodytext för att det skickas inte med någon på testVMA";
     }
 }
