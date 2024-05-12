@@ -20,11 +20,18 @@ public class VmaNewWindowFromObjectActivity extends AppCompatActivity {
 
         TextView headlineView = findViewById(R.id.headlineText);
         TextView bodyTextView = findViewById(R.id.bodyText);
+        TextView publishedView = findViewById(R.id.publishedText);
 
+        TextView detailedInfoView = findViewById(R.id.detailedInfoText);
+
+        String detailedInfo = getIntent().getStringExtra("detailedInfo");
         String headline = getIntent().getStringExtra("headline");
         String bodyText = getIntent().getStringExtra("bodyText");
+        String publishedText = getIntent().getStringExtra("published");
 
         headlineView.setText(headline);
         bodyTextView.setText(bodyText);
+        publishedView.setText(publishedText);
+        detailedInfoView.setText(detailedInfo);
     }
 }

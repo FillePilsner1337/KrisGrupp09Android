@@ -47,8 +47,7 @@ public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
         listener = (view, position) -> {
             VMAMessageObject selectedMessage = adapter.messages.get(position);
             Intent intent = new Intent(VMAACTIVITY.this, VmaNewWindowFromObjectActivity.class);
-            intent.putExtra("headline", selectedMessage.getHeadline());
-            intent.putExtra("bodyText", selectedMessage.getBodyText());
+            intent.putExtra("detailedInfo", selectedMessage.getDetailedInfo());
             startActivity(intent);
         };
     }
