@@ -23,8 +23,16 @@ public class VMAMessageObject {
         return bodyText;
     }
 
+    public String getDetailedInfo() {
+        String date = published.substring(0,10);
+        String time = published.substring(11,16);
+        return "Datum: " + date + "\n" +
+                "Tidpunkt: " + time + "\n\n"+
+                headline + "\n\n" +
+                bodyText + "Dummy text eftersom test VMA inte ger någon text. Dummy text eftersom test VMA inte ger någon text. Dummy text eftersom test VMA inte ger någon text. ";
+    }
     @Override
     public String toString() {
-        return  headline + "\nTid: " + published + "\nBodyText: " + bodyText + "De här är fake bodytext för att det skickas inte med någon på testVMA";
+        return  "NYTT VMA:" + "\n" + headline;
     }
 }

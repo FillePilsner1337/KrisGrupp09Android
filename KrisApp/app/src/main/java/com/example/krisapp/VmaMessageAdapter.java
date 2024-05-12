@@ -11,19 +11,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class VmaMessageAdapter extends RecyclerView.Adapter<VmaMessageAdapter.VmaMessageViewHolder> {
-    private List<VMAMessageObject> messages;
+    List<VMAMessageObject> messages;
+    private RecyclerViewClickListener listener;
 
-    public VmaMessageAdapter(List<VMAMessageObject> messages) {
+    public interface RecyclerViewClickListener {
+        void onClick(View v, int position);
+    }
+
+    public VmaMessageAdapter(List<VMAMessageObject> messages, RecyclerViewClickListener listener) {
         this.messages = messages;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public VmaMessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, parent, false);
-        return new VmaMessageViewHolder(view);
+        return new VmaMessageViewHolder(view, listener);
     }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView vmaMessageExtended;
+        public MyViewHolder(final View view) {
+            super(view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull VmaMessageViewHolder holder, int position) {
         VMAMessageObject message = messages.get(position);
@@ -38,9 +56,10 @@ public class VmaMessageAdapter extends RecyclerView.Adapter<VmaMessageAdapter.Vm
     public static class VmaMessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
 
-        public VmaMessageViewHolder(@NonNull View itemView) {
+        public VmaMessageViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
             super(itemView);
             messageTextView = itemView.findViewById(R.id.messageTextView);
+            itemView.setOnClickListener(v -> listener.onClick(v, getAdapterPosition()));
         }
     }
 }
