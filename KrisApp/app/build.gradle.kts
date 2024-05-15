@@ -1,14 +1,14 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.androidApplication)
 }
 
 android {
-    namespace = "com.example.krisapp"
+    namespace = "com.example.myapplication"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.krisapp"
-        minSdk = 23
+        applicationId = "com.example.myapplication"
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -19,10 +19,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -40,6 +37,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.jackson.databind);
-    implementation(libs.okhttp)
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
+
 }
