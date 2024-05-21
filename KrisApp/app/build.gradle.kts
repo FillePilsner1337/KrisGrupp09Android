@@ -42,4 +42,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.jackson.databind);
     implementation(libs.okhttp)
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
 }
