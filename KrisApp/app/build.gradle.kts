@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,7 +39,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.jackson.databind);
+    implementation(libs.jackson.databind)
     implementation(libs.okhttp)
-    implementation("org.osmdroid:osmdroid-android:6.1.18")
+    implementation(libs.osmdroidAndroid)
+    implementation(libs.osmdroidMapsforge)
 }
