@@ -1,7 +1,12 @@
 package com.example.krisapp;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
@@ -12,17 +17,25 @@ public class ShelterOverlay extends ItemizedIconOverlay<OverlayItem> {
 
     private Context context;
 
-    //Metoderna måste heta så konstigt pga man ärver dem från OnItemGestureListener
-    public ShelterOverlay(List<OverlayItem> shelter, Context context) {
-        super(shelter, new OnItemGestureListener<OverlayItem>() {
+    public ShelterOverlay(List<OverlayItem> shelterItems, Context context) {
+        super(shelterItems, new OnItemGestureListener<OverlayItem>() {
             @Override
             public boolean onItemSingleTapUp(int index, OverlayItem item) {
                 if (item instanceof ShelterWaypoint) {
                     ShelterWaypoint shelter = (ShelterWaypoint) item;
-                    String message = "Address: " + shelter.getAddress() +
+                    String message = "Adress: " + shelter.getAddress() +
                             "\nID: " + shelter.getIdNumber() +
-                            "\nCapacity: " + shelter.getCapacity();
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            "\nKapacitet: " + shelter.getCapacity();
+
+                    LayoutInflater inflater = LayoutInflater.from(context);
+                    View layout = inflater.inflate(R.layout.custom_toast, null);
+                    TextView textView = layout.findViewById(R.id.toast_text);
+                    textView.setText(message);
+
+                    Toast toast = new Toast(context);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    toast.show();
                 }
                 return true;
             }

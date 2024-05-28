@@ -8,7 +8,6 @@ import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,7 +17,7 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -92,18 +92,23 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void addSheltersToMap() {
-        Drawable markerIcon = ImageSizeChanger.resizeDrawable(this, R.drawable.ic_shelter_marker, 50, 50); // Resizea bilden till 50x50 pixlar
+        Drawable markerIcon = ImageSizeChanger.resizeDrawable(this, R.drawable.ic_shelter_marker, 50, 50); // Resize the marker icon to 50x50 pixels
+        List<OverlayItem> overlayItems = new ArrayList<>();
         for (ShelterObject shelter : shelterObjects) {
-            Marker marker = new Marker(map);
-            marker.setPosition(shelter.getPosition());
-            marker.setIcon(markerIcon);
-            marker.setTitle(shelter.getAddress() + "\nID: " + shelter.getIdNumber() + "\nCapacity: " + shelter.getCapacity());
-            marker.setOnMarkerClickListener((marker1, mapView) -> {
-                Toast.makeText(MapActivity.this, marker1.getTitle(), Toast.LENGTH_LONG).show();
-                return true;
-            });
-            map.getOverlays().add(marker);
+            OverlayItem overlayItem = new ShelterWaypoint(
+                    shelter.getAddress(),
+                    "ID: " + shelter.getIdNumber() + "\nKapacitet: " + shelter.getCapacity(),
+                    shelter.getPosition(),
+                    shelter.getAddress(),
+                    shelter.getIdNumber(),
+                    shelter.getCapacity(),
+                    markerIcon
+            );
+            overlayItems.add(overlayItem);
         }
+
+        ShelterOverlay shelterOverlay = new ShelterOverlay(overlayItems, this);
+        map.getOverlays().add(shelterOverlay);
     }
 
     @Override
