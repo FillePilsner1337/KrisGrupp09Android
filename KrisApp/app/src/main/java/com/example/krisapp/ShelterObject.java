@@ -3,6 +3,12 @@ package com.example.krisapp;
 import org.osmdroid.util.GeoPoint;
 
 import java.io.Serializable;
+
+/**
+ * Klass som används för att skapa skyddsrumsobjekt. Denna klass är samma som i desktop-applikationen.
+ * @Author Ola Persson
+ */
+
 public class ShelterObject implements Serializable {
 
     private GeoPoint position;

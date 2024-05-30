@@ -21,11 +21,22 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Hanterar hämtning och visning av Viktiga Meddelanden till Allmänheten(VMA).
+ * Denna klass använder OkHttp och Jackson-biblioteken för att hämta och parsa VMA-data från en given URL-länk.
+ * Den använder också en MessageDisplayer för att visa meddelanden i användargränssnittet.
+ * @Author Filip Claesson
+ */
 public class VmaController {
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private MessageDisplayer displayer;
 
+    /**
+     * Skapar en ny instans av VmaController.
+     * @Author Filip Claesson
+     */
     public VmaController(MessageDisplayer displayer) {
         this.displayer = displayer;
         this.objectMapper = new ObjectMapper();
@@ -87,8 +98,12 @@ public class VmaController {
         public String altitude;
     }
 
-    private MessageDisplayer displayer;
-
+    /**
+     * Hämtar och visar VMA-meddelanden från en fördefinierad URL.
+     * Denna metod skickar en HTTP-förfrågan för att hämta VMA-data, parsar svaren och skickar vidare
+     * resultaten till MessageDisplayer för visning i användargränssnittet.
+     * @Author Filip Claesson
+     */
     public void fetchAndDisplayMessage() {
         String url = "https://api.krisinformation.se/v3/testvmas";
         Request request = new Request.Builder()

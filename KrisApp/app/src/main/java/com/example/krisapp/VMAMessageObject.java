@@ -1,5 +1,9 @@
 package com.example.krisapp;
 
+/**
+ * Klass som används för att skapa VMA objekt.
+ * @Author Ola Persson, Filip Claesson
+ */
 public class VMAMessageObject {
     private String headline;
     private String published;

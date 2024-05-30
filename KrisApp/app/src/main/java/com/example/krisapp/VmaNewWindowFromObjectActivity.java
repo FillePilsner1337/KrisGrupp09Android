@@ -12,6 +12,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/**
+ * Aktivitet för att visa detaljerad information om ett VMA-meddelande.
+ * Denna klass används för att visa detaljerad information om ett VMA-meddelande som valts
+ * från VMAACTIVITY. Informationen inkluderar rubrik, brödtext, publiceringsdatum och
+ * detaljerad information om meddelandet.
+ * @Author Filip Claesson
+ */
 public class VmaNewWindowFromObjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

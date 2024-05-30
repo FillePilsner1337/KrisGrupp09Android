@@ -5,6 +5,10 @@ import android.graphics.drawable.Drawable;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.OverlayItem;
 
+/**
+ * Klass som används för att rita ut skyddsrummen på kartan.
+ * @Author Ola Persson, Jonatan Tempel, Filip Claesson
+ */
 public class ShelterWaypoint extends OverlayItem {
 
     private String address;

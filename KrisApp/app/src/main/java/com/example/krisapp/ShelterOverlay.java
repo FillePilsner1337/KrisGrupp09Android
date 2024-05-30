@@ -13,10 +13,18 @@ import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.List;
 
+/**
+ * En anpassad overlay för att visa information om skyddsrum på kartan.
+ * @Author Filip Claesson
+ */
 public class ShelterOverlay extends ItemizedIconOverlay<OverlayItem> {
 
     private Context context;
 
+    /**
+     * Skapar en ny instans av ShelterOverlay.
+     * @Author Filip Claesson
+     */
     public ShelterOverlay(List<OverlayItem> shelterItems, Context context) {
         super(shelterItems, new OnItemGestureListener<OverlayItem>() {
             @Override

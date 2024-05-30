@@ -29,11 +29,20 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Aktivitet för att visa en karta med skyddsrum.
+ * @Author Filip Claesson, Martin Frick
+ */
 public class MapActivity extends AppCompatActivity {
 
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private ArrayList<ShelterObject> shelterObjects = new ArrayList<>();
+
+    /**
+     * Skapar aktiviteten och sätter upp användargränssnittet.
+     * @Author Filip Claesson, Martin Frick
+     */
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,6 +71,10 @@ public class MapActivity extends AppCompatActivity {
         addSheltersToMap();
     }
 
+    /**
+     * Kopierar CSV-filen från tillgångar till appens filkatalog.
+     * @Author Filip Claesson
+     */
     private void copyFileFromAssets() {
         AssetManager assetManager = getAssets();
         try (InputStream is = assetManager.open("SR.csv");
@@ -76,6 +89,10 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Läser skyddsrumsdata från CSV-filen och laddar dem till en lista med shelter-objekt.
+     * @Author Filip Claesson
+     */
     private void loadShelter() {
         File file = new File(getFilesDir(), "SR.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -91,6 +108,10 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Lägger till skyddsrum som markörer på kartan.
+     * @Author Filip Claesson
+     */
     private void addSheltersToMap() {
         Drawable markerIcon = ImageSizeChanger.resizeDrawable(this, R.drawable.ic_shelter_marker, 50, 50); // Resize the marker icon to 50x50 pixels
         List<OverlayItem> overlayItems = new ArrayList<>();
@@ -123,6 +144,10 @@ public class MapActivity extends AppCompatActivity {
         map.onResume();
     }
 
+    /**
+     * Begär nödvändiga behörigheter från användaren.
+     * @Author Martin Frick
+     */
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
         for (String permission : permissions) {

@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Aktiviteten för att visa och hantera Viktiga Meddelande till Allmänheten(VMA).
+ * @Author Filip Claesson
+ */
 public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
     private VmaController vmaController;
     private RecyclerView messagesRecyclerView;
@@ -22,6 +26,11 @@ public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
     private TextView messageTextView;
     private VmaMessageAdapter.RecyclerViewClickListener listener;
 
+    /**
+     * Metoden som körs när aktiviteten skapas.
+     * Ställer in layouten för aktiviteten, initierar RecyclerView och laddar VMA-meddelanden.
+     * @Author Filip Claesson
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +52,10 @@ public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
         messagesRecyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Initierar Clicklistener för att hantera användarens interaktion med VMA-meddelanden.
+     * @Author Filip Claesson
+     */
     private void setupClickListener() {
         listener = (view, position) -> {
             VMAMessageObject selectedMessage = adapter.messages.get(position);
@@ -51,6 +64,10 @@ public class VMAACTIVITY extends AppCompatActivity implements MessageDisplayer{
             startActivity(intent);
         };
     }
+    /**
+     * Visar en lista med VMA-meddelanden.
+     * @Author Filip Claesson
+     */
     @Override
     public void displayMessages(List<VMAMessageObject> messages) {
         adapter = new VmaMessageAdapter(messages, listener);

@@ -10,18 +10,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * Adapter för att hantera och visa VMA-meddelanden i en RecyclerView.
+ *
+ * Denna klass används i VMAACTIVITY för att visa en lista med VMA-meddelanden.
+ * Adaptern hanterar visningen och interaktionen med varje VMA-meddelande i listan.
+ *
+ * @Author Filip Claesson
+ */
 public class VmaMessageAdapter extends RecyclerView.Adapter<VmaMessageAdapter.VmaMessageViewHolder> {
     List<VMAMessageObject> messages;
     private RecyclerViewClickListener listener;
 
+    /**
+     * Interface för att hantera klickhändelser på RecyclerView-element, dvs varje VMA-meddelande.
+     * @Author Filip Claesson
+     */
     public interface RecyclerViewClickListener {
         void onClick(View v, int position);
     }
 
+    /**
+     * Constructor för VmaMessageAdapter.
+     * @Author Filip Claesson
+     */
     public VmaMessageAdapter(List<VMAMessageObject> messages, RecyclerViewClickListener listener) {
         this.messages = messages;
         this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -42,6 +59,11 @@ public class VmaMessageAdapter extends RecyclerView.Adapter<VmaMessageAdapter.Vm
             listener.onClick(v, getAdapterPosition());
         }
     }
+
+    /**
+     * Visar data på den angivna positionen i RecyclerView.
+     * @Author Filip Claesson
+     */
     @Override
     public void onBindViewHolder(@NonNull VmaMessageViewHolder holder, int position) {
         VMAMessageObject message = messages.get(position);
@@ -53,6 +75,10 @@ public class VmaMessageAdapter extends RecyclerView.Adapter<VmaMessageAdapter.Vm
         return messages.size();
     }
 
+    /**
+     * ViewHolder-klass för att hantera varje VMA-meddelande i RecyclerView.
+     * @Author Filip Claesson
+     */
     public static class VmaMessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
 

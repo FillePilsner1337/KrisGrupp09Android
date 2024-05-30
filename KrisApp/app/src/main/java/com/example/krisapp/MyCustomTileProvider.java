@@ -5,6 +5,10 @@ import org.osmdroid.tileprovider.MapTileProviderBase;
 import org.osmdroid.tileprovider.modules.IFilesystemCache;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 
+/**
+ * En anpassad tile-leverantör för att tillhandahålla tiles till kartan.
+ * @Author Martin Frick
+ */
 public class MyCustomTileProvider extends MapTileProviderBase {
 
     public MyCustomTileProvider(ITileSource it){

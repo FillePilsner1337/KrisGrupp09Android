@@ -7,8 +7,15 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+/**
+ * Huvudaktiviteten för Krisappen.
+ * @Author Filip Claesson
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Skapar aktiviteten och sätter upp användargränssnittet.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
