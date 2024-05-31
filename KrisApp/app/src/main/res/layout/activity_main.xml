@@ -33,7 +33,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="test3"
         android:background="#009688"
         app:layout_constraintStart_toEndOf="@id/buttonKarta"
         app:layout_constraintEnd_toStartOf="@id/button3"
@@ -43,7 +43,7 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="test1"
         android:background="#009688"
         app:layout_constraintStart_toEndOf="@id/button2"
         app:layout_constraintEnd_toStartOf="@id/buttonVma"
@@ -53,10 +53,20 @@
         android:id="@+id/buttonVma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VMA"
         android:background="#009688"
-        app:layout_constraintStart_toEndOf="@id/button3"
+        android:text="VMA"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/button3" />
+
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

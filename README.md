@@ -6,3 +6,4 @@
 6. Navigera runt i appen (enda som är implementerat just nu är VMA-knappen)
 
    Och orkar ni inte göra ovanstående steg vilket är fullt förståeligt, ta en titt på koden bara här på git.
+
