@@ -3,6 +3,4 @@
 3. Starta den device du skapat under device manager
 4. Klicka på fliken "running devices"
 5. Därefter startar du själva appen genom att klicka på "run app" (liknande som i intellij)
-6. Navigera runt i appen (enda som är implementerat just nu är VMA-knappen)
-
-   Och orkar ni inte göra ovanstående steg vilket är fullt förståeligt, ta en titt på koden bara här på git.
+6. Navigera runt i appen (enda som är implementerat just nu är VMA-knappen) och Kartan, man kan även klicka på skyddsrum.
