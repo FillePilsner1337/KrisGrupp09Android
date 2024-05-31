@@ -7,6 +7,12 @@ import org.osmdroid.tileprovider.tilesource.ITileSource;
 
 /**
  * En anpassad tile-leverantör för att tillhandahålla tiles till kartan.
+ *
+ * Till stor del är nedan kod en modifierad version med original i denna repon:
+ * https://github.com/Eimg851/AndroidApp2018
+ * Samt denna videon:
+ * https://youtu.be/xoFtgcOoO1I
+ *
  * @Author Martin Frick
  */
 public class MyCustomTileProvider extends MapTileProviderBase {

@@ -31,6 +31,12 @@ import java.util.List;
 
 /**
  * Aktivitet för att visa en karta med skyddsrum.
+ *
+ * Till stor del är nedan kod en modifierad version med original i denna repon:
+ * https://github.com/Eimg851/AndroidApp2018
+ * Samt denna videon:
+ * https://youtu.be/xoFtgcOoO1I
+ *
  * @Author Filip Claesson, Martin Frick
  */
 public class MapActivity extends AppCompatActivity {
@@ -146,6 +152,12 @@ public class MapActivity extends AppCompatActivity {
 
     /**
      * Begär nödvändiga behörigheter från användaren.
+     *  *
+     *  * Till stor del är nedan kod en modifierad version med original i denna repon:
+     *  * https://github.com/Eimg851/AndroidApp2018
+     *  * Samt denna videon:
+     *  * https://youtu.be/xoFtgcOoO1I
+     *
      * @Author Martin Frick
      */
     private void requestPermissionsIfNecessary(String[] permissions) {
